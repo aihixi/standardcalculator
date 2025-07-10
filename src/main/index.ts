@@ -1,23 +1,30 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, screen } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
 function createWindow(): void {
-  // Create the browser window.
+  // 获取主显示器的工作区尺寸
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize
+
+  // 设置窗口为屏幕的 80% 大小，并居中
+  const winWidth = Math.floor(width * 0.8)
+  const winHeight = Math.floor(height * 0.8)
+
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: winWidth,
+    height: winHeight,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false,
+      sandbox: false
     }
   })
 
   mainWindow.on('ready-to-show', () => {
+    mainWindow.center() // 居中显示
     mainWindow.show()
   })
 
