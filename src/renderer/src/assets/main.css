@@ -188,16 +188,3 @@ code {
     display: none;
   }
 }
-
-.container {
-  height: 50vh; /* 容器高度为视口的一半 */
-}
-
-#keys {
-  display: grid;
-  grid-template-columns: repeat(6, 60px);
-  row-gap: 20px;
-  column-gap: 20px;
-  justify-content: center;
-  padding: 20px;
-}
