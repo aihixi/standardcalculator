@@ -15,6 +15,11 @@ export default defineConfig({
         '@renderer': resolve('src/renderer/src')
       }
     },
-    plugins: [vue()]
+    plugins: [vue()],
+    // ✅ 添加 base 和 build.outDir
+    base: './',
+    build: {
+      outDir: 'out/renderer'
+    }
   }
 })
