@@ -1,66 +1,62 @@
 <template>
   <div class="demo-card">
-    <t-card class="info-card" :bordered="false" hover-shadow :style="{ width: '500px' ,height: '150px' }">
+    <t-card class="info-card" :bordered="false" hover-shadow :style="{ width: '480px' ,height: '150px' }" @click="clickHandler">
       {{ exprArr.join('') }}
-      <template>
-        <a href="javascript:void(0)" @click="clickHandler">操作</a>
-      </template>
     </t-card>
   </div>
     <div class="newdemo-card">
-      <t-card class="result-card" :bordered="false" hover-shadow :style="{ width: '500px' ,height: '70px' }">
+      <t-card class="result-card" :bordered="false" :style="{ width: '500px' ,height: '70px' }" @click="clickHandler">
         {{ result }}
         <template>
-        <a href="javascript:void(0)" @click="clickHandler">操作</a>
-      </template>
+          <a href="javascript:void(0)" @click="clickHandler">操作</a>
+        </template>
       </t-card>
     </div>
-    <!-- 上半部分内容，可以为空 -->
   <!-- 键盘区域 -->
   <div id="keys">
-    <t-button size="large" shape ="round" @click="onClick('sin')">sin</t-button>
-    <t-button size="large" shape ="round" @click="onClick('cos')">cos</t-button>
-    <t-button size="large" shape ="round" @click="onClick('tan')">tan</t-button>
-    <t-button size="large" shape ="round" @click="onClick('asin')">sin⁻¹</t-button>
-    <t-button size="large" shape ="round" @click="onClick('acos')">cos⁻¹</t-button>
-    <t-button size="large" shape ="round" @click="onClick('atan')">tan⁻¹</t-button>
-    <t-button size="large" shape ="round" @click="onClick('^2')">x²</t-button>
-    <t-button size="large" shape ="round" @click="onClick('^')">^</t-button>
-    <t-button size="large" shape ="round" @click="onClick('log')">log</t-button>
-    <t-button size="large" shape ="round" @click="onClick('(')">(</t-button>
-    <t-button size="large" shape ="round" @click="onClick(')')">)</t-button>
-    <t-button size="large" shape ="round" @click="onClick_ac()">清空</t-button>
-    <t-button size="large" shape ="round" @click="onClick('sqrt')">√</t-button>
-    <t-button size="large" shape ="round" @click="onClick('7')">7</t-button>
-    <t-button size="large" shape ="round" @click="onClick('8')">8</t-button>
-    <t-button size="large" shape ="round" @click="onClick('9')">9</t-button>
-    <t-button size="large" shape ="round" @click="onClick('*0.01')">%</t-button>
-    <t-button size="large" shape ="round" @click="onClick_de()">DEL</t-button>
-    <t-button size="large" shape ="round" @click="onClick('^(-1)')">x⁻¹</t-button>
-    <t-button size="large" shape ="round" @click="onClick('4')">4</t-button>
-    <t-button size="large" shape ="round" @click="onClick('5')">5</t-button>
-    <t-button size="large" shape ="round" @click="onClick('6')">6</t-button>
-    <t-button size="large" shape ="round" @click="onClick('*')">×</t-button>
-    <t-button size="large" shape ="round" @click="onClick('/')">/</t-button>
+    <t-button class="button-style" @click="onClick('sin')">sin</t-button>
+    <t-button class="button-style" @click="onClick('cos')">cos</t-button>
+    <t-button class="button-style" @click="onClick('tan')">tan</t-button>
+    <t-button class="button-style" @click="onClick('asin')">sin⁻¹</t-button>
+    <t-button class="button-style" @click="onClick('acos')">cos⁻¹</t-button>
+    <t-button class="button-style" @click="onClick('atan')">tan⁻¹</t-button>
+    <t-button class="button-style" @click="onClick('^2')">x²</t-button>
+    <t-button class="button-style" @click="onClick('^')">^</t-button>
+    <t-button class="button-style" @click="onClick('log')">log</t-button>
+    <t-button class="button-style" @click="onClick('(')">(</t-button>
+    <t-button class="button-style" @click="onClick(')')">)</t-button>
+    <t-button class="button-style" @click="onClick_ac()">清空</t-button>
+    <t-button class="button-style" @click="onClick('sqrt')">√</t-button>
+    <t-button class="button-style" @click="onClick('7')">7</t-button>
+    <t-button class="button-style" @click="onClick('8')">8</t-button>
+    <t-button class="button-style" @click="onClick('9')">9</t-button>
+    <t-button class="button-style" @click="onClick('*0.01')">%</t-button>
+    <t-button class="button-style" @click="onClick_de()">DEL</t-button>
+    <t-button class="button-style" @click="onClick('^(-1)')">x⁻¹</t-button>
+    <t-button class="button-style" @click="onClick('4')">4</t-button>
+    <t-button class="button-style" @click="onClick('5')">5</t-button>
+    <t-button class="button-style" @click="onClick('6')">6</t-button>
+    <t-button class="button-style" @click="onClick('*')">×</t-button>
+    <t-button class="button-style" @click="onClick('/')">/</t-button>
     <div style="text-align: center">水</div>
-    <t-button size="large" shape ="round" @click="onClick('1')">1</t-button>
-    <t-button size="large" shape ="round" @click="onClick('2')">2</t-button>
-    <t-button size="large" shape ="round" @click="onClick('3')">3</t-button>
-    <t-button size="large" shape ="round" @click="onClick('+')">+</t-button>
-    <t-button size="large" shape ="round" @click="onClick('-')">-</t-button>
+    <t-button class="button-style" @click="onClick('1')">1</t-button>
+    <t-button class="button-style" @click="onClick('2')">2</t-button>
+    <t-button class="button-style" @click="onClick('3')">3</t-button>
+    <t-button class="button-style" @click="onClick('+')">+</t-button>
+    <t-button class="button-style" @click="onClick('-')">-</t-button>
     <div style="text-align: center">印</div>
-    <t-button size="large" shape ="round" @click="onClick('pi')">π</t-button>
-    <t-button size="large" shape ="round" @click="onClick('0')">0</t-button>
-    <t-button size="large" shape ="round" @click="onClick('e')">e</t-button>
-    <t-button size="large" shape ="round" @click="onClick('.')">.</t-button>
-    <t-button size="large" shape ="round" @click="evaluating()">=</t-button>
+    <t-button class="button-style" @click="onClick('pi')">π</t-button>
+    <t-button class="button-style" @click="onClick('0')">0</t-button>
+    <t-button class="button-style" @click="onClick('e')">e</t-button>
+    <t-button class="button-style" @click="onClick('.')">.</t-button>
+    <t-button class="button-style" @click="evaluating()">=</t-button>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { evaluate } from 'mathjs'
-import { ref } from 'vue'
 import { MessagePlugin } from 'tdesign-vue-next';
+import { ref } from 'vue';
 
 const exprArr = ref<string[]>([])
 const result = ref<string>('')
@@ -112,15 +108,12 @@ const evaluating = (): number => {
 }
 
 const clickHandler = () => {
-  MessagePlugin.success('操作');
+  MessagePlugin.success('复制成功');
 };
+
 </script>
 
 <style scoped>
-
-.transparent-box {
-  height: 10vh;          /* 高度为视口的10% */
-}
 
 .container {
   height: 30vh; /* 容器高度为视口的一半 */
@@ -128,19 +121,36 @@ const clickHandler = () => {
 
 #keys {
   position: absolute;
-  top: 50%; /* 从页面中间开始 */
+  top: 50%; /* 从页面中间开始（垂直方向） */
+  left: 50%; /* 水平方向起点在页面中间 */
+  transform: translateX(-50%); /* 往左偏移自身一半，实现水平居中 */
+
   display: grid;
-  grid-template-columns: repeat(6, 60px);
+  grid-template-columns: repeat(6, 70px);
   row-gap: 20px;
-  column-gap: 20px;
+  column-gap: 10px;
   justify-content: center;
   padding: 20px;
 }
 
 
+.button-style {
+  width: 70px;
+  height: 40px;
+  font-size: 25px;
+  color: #333;
+  background-color: #f0f0f0;
+}
+
+.button-style:hover {
+  background-color: #B4D8FF;
+}
+
 .demo-card {
   position: absolute;
-  bottom: 70%; /* 从页面中部开始 */
+  bottom: 65%; /* 从页面中部开始 */
+  left: 50%; /* 水平中心点 */
+  transform: translateX(-50%); /* 向左移动自身宽度的一半 */
   max-height: 30vh; /* 最大高度为视口一半 */
   padding: 16px;
   background-color: transparent;
@@ -167,13 +177,14 @@ const clickHandler = () => {
 
 .result-card {
   /* 字体样式控制 */
-  font-size: 26px;
+  background-color: transparent;
+  font-size: 50px;
   font-family: 'Arial', sans-serif;
   font-weight: normal;
-  line-height: 1.6;
+  line-height: 1;
   color: #333;
   text-align: right;
   overflow: hidden; /* 隐藏超出部分 */
-  text-overflow: ellipsis; /* 超出部分显示省略号 */
 }
+
 </style>

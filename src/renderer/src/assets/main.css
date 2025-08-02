@@ -21,7 +21,8 @@ body {
 
 .page-header {
   position: absolute;
-  top: 0;
+  top: 40px;
+  left: 20px;
 }
 
 .page-footer {
