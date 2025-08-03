@@ -1,15 +1,12 @@
 <template>
   <div class="demo-card">
-    <t-card class="info-card" :bordered="false" hover-shadow :style="{ width: '480px' ,height: '150px' }" @click="clickHandler">
-      {{ exprArr.join('') }}
+    <t-card class="info-card" :bordered="false" hover-shadow :style="{ width: '480px' ,height: '150px' }" @click="expressionclickHandler">
+      {{ showExpressions.join('') }}
     </t-card>
   </div>
     <div class="newdemo-card">
-      <t-card class="result-card" :bordered="false" :style="{ width: '500px' ,height: '70px' }" @click="clickHandler">
+      <t-card class="result-card" :bordered="false" :style="{ width: '500px' ,height: '70px' }" @click="resultclickHandler">
         {{ result }}
-        <template>
-          <a href="javascript:void(0)" @click="clickHandler">操作</a>
-        </template>
       </t-card>
     </div>
   <!-- 键盘区域 -->
@@ -38,13 +35,13 @@
     <t-button class="button-style" @click="onClick('6')">6</t-button>
     <t-button class="button-style" @click="onClick('*')">×</t-button>
     <t-button class="button-style" @click="onClick('/')">/</t-button>
-    <div style="text-align: center">水</div>
+    <div style="text-align: center; font-size: 25px;">水</div>
     <t-button class="button-style" @click="onClick('1')">1</t-button>
     <t-button class="button-style" @click="onClick('2')">2</t-button>
     <t-button class="button-style" @click="onClick('3')">3</t-button>
     <t-button class="button-style" @click="onClick('+')">+</t-button>
     <t-button class="button-style" @click="onClick('-')">-</t-button>
-    <div style="text-align: center">印</div>
+    <div style="text-align: center; font-size: 25px;">印</div>
     <t-button class="button-style" @click="onClick('pi')">π</t-button>
     <t-button class="button-style" @click="onClick('0')">0</t-button>
     <t-button class="button-style" @click="onClick('e')">e</t-button>
@@ -58,27 +55,38 @@ import { evaluate } from 'mathjs'
 import { MessagePlugin } from 'tdesign-vue-next';
 import { ref } from 'vue';
 
+
 const exprArr = ref<string[]>([])
+const showExpressions = ref<string[]>([])
 const result = ref<string>('')
 const EPSILON = 1e-12; // 误差阈值
 
+
 const onClick = (num: string) => {
   if (num === 'e' && exprArr.value[exprArr.value.length - 1] === 'log') {
+    showExpressions.value.push(num)
     return; // 避免连续输入 'log' 后跟 'e'
   }
+  showExpressions.value.push(num)
   exprArr.value.push(num);
   console.log(exprArr.value);
 }
 
 
 const onClick_ac = (): void => {
+  showExpressions.value = []
   exprArr.value = []
   result.value = ''
 }
 
 
 const onClick_de = (): void => {
+  if (exprArr.value[exprArr.value.length - 1] === 'log'&&showExpressions.value[showExpressions.value.length - 1] === 'e') {
+    showExpressions.value.pop()
+    return; // 避免连续输入 'log' 后跟 'e'
+  }
   exprArr.value.pop()
+  showExpressions.value.pop()
   console.log(exprArr.value)
 }
 
@@ -97,17 +105,33 @@ const evaluating = (): number => {
     const numresult = sanitizeResult(rawResult)
     console.log(numresult)
     exprArr.value = []
+    showExpressions.value = []
     result.value = numresult.toString()
     return numresult
   } catch (e) {
     console.error('你认真的吗？')
     exprArr.value = []
+    showExpressions.value = []
     result.value = '你认真的吗？'
     return NaN
   }
 }
 
-const clickHandler = () => {
+const expressionclickHandler = () => {
+  const textToCopy = showExpressions.value.join('');
+  if (!textToCopy) {
+    return;
+  }
+  navigator.clipboard.writeText(textToCopy);
+  MessagePlugin.success('复制成功');
+};
+
+const resultclickHandler = () => {
+  const textToCopy = result.value;
+  if (!textToCopy) {
+    return;
+  }
+  navigator.clipboard.writeText(textToCopy);
   MessagePlugin.success('复制成功');
 };
 
@@ -115,16 +139,11 @@ const clickHandler = () => {
 
 <style scoped>
 
-.container {
-  height: 30vh; /* 容器高度为视口的一半 */
-}
-
 #keys {
   position: absolute;
   top: 50%; /* 从页面中间开始（垂直方向） */
   left: 50%; /* 水平方向起点在页面中间 */
   transform: translateX(-50%); /* 往左偏移自身一半，实现水平居中 */
-
   display: grid;
   grid-template-columns: repeat(6, 70px);
   row-gap: 20px;
@@ -137,9 +156,12 @@ const clickHandler = () => {
 .button-style {
   width: 70px;
   height: 40px;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
   font-size: 25px;
+  font-weight: bold;
   color: #333;
-  background-color: #f0f0f0;
+  background-color: #C2C2C2;
+  border-color: #333;
 }
 
 .button-style:hover {
@@ -168,11 +190,12 @@ const clickHandler = () => {
   /* 字体样式控制 */
   font-size: 26px;
   font-family: 'Arial', sans-serif;
-  font-weight: normal;
+  font-weight: bold !important;
   line-height: 1.6;
   color: #333;
   text-align: right;
   overflow: hidden; /* 隐藏超出部分 */
+  background-color: #B4D8FF ;
 }
 
 .result-card {
