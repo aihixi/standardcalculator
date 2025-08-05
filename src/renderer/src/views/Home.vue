@@ -2,6 +2,7 @@
   <div class="demo-card">
     <t-card class="info-card" :bordered="false" hover-shadow :style="{ width: '480px' ,height: '150px' }" @click="expressionclickHandler">
       {{ showExpressions.join('') }}
+      {{ tempArr.join('') }}
     </t-card>
   </div>
     <div class="newdemo-card">
@@ -51,6 +52,7 @@
 </template>
 
 <script lang="ts" setup>
+
 import { evaluate } from 'mathjs'
 import { MessagePlugin } from 'tdesign-vue-next';
 import { ref } from 'vue';
@@ -58,11 +60,13 @@ import { ref } from 'vue';
 
 const exprArr = ref<string[]>([])
 const showExpressions = ref<string[]>([])
+const tempArr = ref<string[]>([])
 const result = ref<string>('')
 const EPSILON = 1e-12; // 误差阈值
 
 
 const onClick = (num: string) => {
+  tempArr.value = []
   if (num === 'e' && exprArr.value[exprArr.value.length - 1] === 'log') {
     showExpressions.value.push(num)
     return; // 避免连续输入 'log' 后跟 'e'
@@ -76,6 +80,7 @@ const onClick = (num: string) => {
 const onClick_ac = (): void => {
   showExpressions.value = []
   exprArr.value = []
+  tempArr.value = []
   result.value = ''
 }
 
@@ -100,6 +105,7 @@ const sanitizeResult = (value: number): number => {
 }
 
 const evaluating = (): number => {
+  tempArr.value = showExpressions.value
   try {
     const rawResult = evaluate(exprArr.value.join(''))
     const numresult = sanitizeResult(rawResult)
@@ -118,7 +124,7 @@ const evaluating = (): number => {
 }
 
 const expressionclickHandler = () => {
-  const textToCopy = showExpressions.value.join('');
+  const textToCopy = showExpressions.value.join('')||tempArr.value.join('');
   if (!textToCopy) {
     return;
   }

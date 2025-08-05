@@ -8,7 +8,3 @@
     </main>
   </div>
 </template>
-
-<script lang="ts" setup>
-// 这里可以写全局逻辑或引入全局组件
-</script>
