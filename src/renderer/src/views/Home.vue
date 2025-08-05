@@ -35,7 +35,7 @@
     <t-button class="button-style" @click="onClick('5')">5</t-button>
     <t-button class="button-style" @click="onClick('6')">6</t-button>
     <t-button class="button-style" @click="onClick('*')">×</t-button>
-    <t-button class="button-style" @click="onClick('/')">/</t-button>
+    <t-button class="button-style" @click="onClick('/')">÷</t-button>
     <div style="text-align: center; font-size: 25px;">水</div>
     <t-button class="button-style" @click="onClick('1')">1</t-button>
     <t-button class="button-style" @click="onClick('2')">2</t-button>
@@ -71,8 +71,30 @@ const onClick = (num: string) => {
     showExpressions.value.push(num)
     return; // 避免连续输入 'log' 后跟 'e'
   }
-  showExpressions.value.push(num)
   exprArr.value.push(num);
+  if (num === 'pi') {
+    showExpressions.value.push('π');
+  } else if (num === 'sqrt') {
+    showExpressions.value.push('√');
+  } else if (num === '^2') {
+    showExpressions.value.push('²');
+  } else if (num === '^(-1)') {
+    showExpressions.value.push('⁻¹');
+  } else if (num === '*0.01') {
+    showExpressions.value.push('%');
+  } else if (num === '*') {
+    showExpressions.value.push('×');
+  } else if (num === '/') {
+    showExpressions.value.push('÷');
+  } else if (num === 'asin') {
+    showExpressions.value.push('sin⁻¹');
+  } else if (num === 'acos') {
+    showExpressions.value.push('cos⁻¹');
+  } else if (num === 'atan') {
+    showExpressions.value.push('tan⁻¹');
+  } else {
+    showExpressions.value.push(num);
+  }
   console.log(exprArr.value);
 }
 
