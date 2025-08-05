@@ -1,6 +1,6 @@
 {
   "name": "install-standardcalculator",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "AStandardCalculator",
   "main": "./out/main/index.js",
   "author": "aihixi",
