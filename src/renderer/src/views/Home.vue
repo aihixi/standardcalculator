@@ -184,9 +184,7 @@ const resultclickHandler = () => {
 .button-style {
   width: 70px;
   height: 40px;
-  font-family: 'Segoe UI', 'Arial', sans-serif;
   font-size: 25px;
-  font-weight: bold;
   color: #333;
   background-color: #C2C2C2;
   border-color: #333;
@@ -194,6 +192,10 @@ const resultclickHandler = () => {
 
 .button-style:hover {
   background-color: #B4D8FF;
+}
+
+.t-button__text {
+  font-weight: bolder !important;
 }
 
 .demo-card {
