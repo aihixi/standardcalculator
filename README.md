@@ -15,9 +15,9 @@
 <img src='./build/.png' width="200" height="300"/>
 </p>
 
-## Features
+## Next version
 
-- no
+- [Standardcalculator2](https://github.com/aihixi/Standardcalculator2)
 
 
 ## Recommended IDE Setup
