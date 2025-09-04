@@ -12,7 +12,7 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: #EBEBEB;
+  background-color: #ebebeb;
   background-size: cover;
   user-select: none;
 }
@@ -22,7 +22,6 @@ body {
   top: 40px;
   left: 20px;
 }
-
 
 /* code {
   font-weight: 600;
